@@ -7,7 +7,56 @@
     letter-spacing: 1px;
     background-color: white;
   }
+
+  #aeroaspire-header {
+    display: flex;  
+    text-align: center;
+    font-size: 42px;
+    font-weight: bold;
+    margin: 10px 0;
+    color: #2A004E;
+    align-items: center;       
+  justify-content: center;  
+  gap: 10px;     
+    font-family:Arial, Helvetica, sans-serif;
+  }
   
+  #aeroaspire-header img {
+    height: 60px;
+  }
+  
+  #aeroaspire-header div {
+    font-size: 24px;
+    font-weight: bold;
+    color: #2A004E;
+  }
+  
+  #aeroaspire-link {
+    text-decoration: none;   
+    display: inline-block;   
+  }
+  
+  #aeroaspire-link span {
+    text-decoration: none;    
+    color: inherit;           
+  }
+
+  #aeroaspire-header a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  footer {
+    text-align: center;
+    font-size: 18px;
+    color: #888;
+    color: #555;
+  }
+
+
   div, img {
     padding: 0px;
     margin: 0px;
@@ -15,10 +64,10 @@
   
   #content 
   {
-      padding: 27px;
+      padding: 27px 0px 27px 27px;
       margin: 0px auto;
       width: 320px;
-      height:800px;
+      height:642px;
       background-image:url('../img/calculator-background.png');
       background-repeat: no-repeat;
   }
@@ -90,8 +139,6 @@
       position:relative;
   }
   
-  #keypad>img {
-  }
   
   #options {
     margin: 0px auto;
