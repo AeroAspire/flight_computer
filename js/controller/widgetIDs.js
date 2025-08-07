@@ -1,14 +1,4 @@
-///
-// @file    $URL: http://192.168.2.10/svn/ASA/CX-3/trunk/Firmware/calculator/ui/include/widgetIDs.h $
-// @author  $Author: dean $
-// @version $Rev: 920 $
-// @date    $Date: 2013-06-25 17:22:00 -0700 (Tue, 25 Jun 2013) $
-// @brief   IDs for the widgets used in the CX-3 application
-//
-//#ifndef __INCLUDED_WIDGETIDS_H
-//#define __INCLUDED_WIDGETIDS_H
 
-/// @brief  Contains a unique ID for each type of widget used in the UI
 var CX3_WIDGET_ID = {
   VAR_STATUS_ICON : 1,
   VAR_FIELD_NAME : 2,

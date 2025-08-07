@@ -1,17 +1,3 @@
-///
-// @file    $URL: http://192.168.2.10/svn/ASA/CX-3/trunk/Firmware/calculator/model/src/definedVariables.cpp $
-// @author  $Author: george $
-// @version $Rev: 921 $
-// @date    $Date: 2013-06-28 14:10:19 -0700 (Fri, 28 Jun 2013) $
-// @brief
-//
-//#include "observable.h"
-//#include "variables.h"
-//#include "definedUnits.h"
-//#include "CX3Equations.h"
-
-// maximum items & variable/item (for weight and balance equations) 
-// and points (for Rhumb line equations) here
 CONST.MAX_ITEMS = 8;
 CONST.VARIABLES_PER_ITEM = 3; // inputs per item (weight, arm, moment)
 CONST.ITEMS_OUTPUT_EQUATIONS = 9; // weight & balance output, intermediate, and dummy euqations
@@ -48,8 +34,8 @@ var DistanceTotal = new Variable('Dist', distance, true); //total distance read 
 // length
 var Length = new Variable('Length', length); // set default units
 var MomArm = new Variable('Len', length); // This is an array?
-var ChangeCG = new Variable('\176CG', length); // TODO: need abbreviation. delta-CG
-var ChangeArm = new Variable('\176Arm', length); // TODO: need abbreviation. delta-Arm
+var ChangeCG = new Variable('~CG', length); // TODO: need abbreviation. delta-CG
+var ChangeArm = new Variable('~Arm', length); // TODO: need abbreviation. delta-Arm
 
 // speed
 var CalAirspd = new Variable('CAS', air_speed);
@@ -170,13 +156,13 @@ var Weight6 = new Variable('Wt', weight);
 var Weight7 = new Variable('Wt', weight);
 var Weight8 = new Variable('Wt', weight);
 CONST.ITEM_WEIGHT = [
-  Weight1,
-  Weight2,
-  Weight3,
-  Weight4,
-  Weight5,
-  Weight6,
-  Weight7,
+    Weight1,
+    Weight2,
+    Weight3,
+    Weight4,
+    Weight5,
+    Weight6,
+    Weight7,
     Weight8,
 ];
 
@@ -360,12 +346,12 @@ var RhumbLineAB = new Variable('RHUMB LINE: AB', item); //TODO: change back to "
 var RhumbLineBC = new Variable('RHUMB LINE: BC', item);
 var RhumbLineCD = new Variable('RHUMB LINE: CD', item);
 CONST.RHUMB_LINES = [
-  PointA,
-  RhumbLineAB,
-  PointB,
-  RhumbLineBC,
-  PointC,
-  RhumbLineCD,
+    PointA,
+    RhumbLineAB,
+    PointB,
+    RhumbLineBC,
+    PointC,
+    RhumbLineCD,
     PointD,
 ];
 
@@ -422,17 +408,17 @@ var ZoneDest = new Variable(
 
 // NOTE: any changes to settings needs to be matched in SettingID_t in CX3Settings.h
 CONST.SETTINGS = [
-  Theme,
-  Backlight,
-  //ScrollFunction,
-  //ScrollSpeed,
-  Clock,
-  DefaultUnits,
-  UnitChange,
-  Favorite,
-  AircraftProfile,    // part of aircraft profile
-  UserData,
-  FirmwareVersion,
-  ZoneLocal,
+    Theme,
+    Backlight,
+    //ScrollFunction,
+    //ScrollSpeed,
+    Clock,
+    DefaultUnits,
+    UnitChange,
+    Favorite,
+    AircraftProfile, // part of aircraft profile
+    UserData,
+    FirmwareVersion,
+    ZoneLocal,
     ZoneDest,
 ];

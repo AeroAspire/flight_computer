@@ -1,22 +1,3 @@
-///
-// @author  $Author: george $
-// @version $Rev: 643 $
-// @date    $Date: 2011-12-30 15:26:10 -0800 (Fri, 30 Dec 2011) $
-// @brief   CX-3 User Data - stored in non-volatile memory
-//
-//#ifndef __INCLUDED_CX3USERDATA_H
-//#define __INCLUDED_CX3USERDATA_H
-//
-//#include "CX3Settings.h"
-//#include "CX3Equations.h"
-//#include "calculator.h"
-//#include "definedVariables.h"
-//
-//using namespace Calculator;
-
-//// @brief variable as saved in NV user data
-//// input: bit0=1: input value (not calculated)
-////    bit1=1: input value copied (bit0 must =1)
 function UserVariable() {
   this.input = CONST.NO_VALUE;
   this.unit  = CONST.NO_VALUE;    // variable prefered unit index

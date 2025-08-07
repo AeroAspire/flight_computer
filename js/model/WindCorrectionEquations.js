@@ -1,31 +1,4 @@
-///
-// @file    $URL: http://192.168.2.10/svn/ASA/CX-3/trunk/Firmware/calculator/model/include/WindCorrectionEquations.h $
-// @author  $Author: george $
-// @version $Rev: 790 $
-// @date    $Date: 2012-04-10 16:17:20 -0700 (Tue, 10 Apr 2012) $
-// @brief   Equations used for calcuating wind corrections (i.e. Wind Triangle)
-//
-// NOTE that Equation instances must not have mutable state for this to work
-// (they get constructed once, globally)!
-//
-//#ifndef __INCLUDED_WIND_CORRECTION_EQUATIONS_H
-//#define __INCLUDED_WIND_CORRECTION_EQUATIONS_H
-//
-//#include "calculator.h"
-//#include "CX3Equations.h"
-//#include "variables.h"
-//#include "equations.h"
-//#include "math.h"
 
-////////////////////////////////////////////////////////////////////////////////
-///  @brief  
-///    Makes sure that angles are in the range 0 - 2pi
-///
-///  @param [in] <double - angle> <angle to normalize>
-///
-///  @return <double - adjusted angle>
-///
-////////////////////////////////////////////////////////////////////////////////
 function normalizeAngle(angle) {
     var tmp = angle % (2 * CONST.PI);
     if (tmp < 0)
@@ -34,14 +7,7 @@ function normalizeAngle(angle) {
 }
 
 var WindCorrectionEquation = {
-    ////////////////////////////////////////////////////////////////////////////////
-    ///  @brief  
-    ///    Wind directions are given as "From" direction rather than "To", 
-    //    we'll add 180 degrees to get our vector point in the correct direction.
-    ///
-    ///  @param [in] <windDir> <wind vector as entered by the user, in radians>
-    ///
-    ////////////////////////////////////////////////////////////////////////////////
+    
     windAngleCorrection: function (windDir) {
         var cor_wind = (windDir + CONST.PI);
         if (cor_wind > (2 * CONST.PI))
@@ -49,13 +15,7 @@ var WindCorrectionEquation = {
         return cor_wind;
     },
 
-    ////////////////////////////////////////////////////////////////////////////////
-    ///  @brief  
-    ///    
-    ///
-    ///  @param [in] <> <>
-    ///
-    ////////////////////////////////////////////////////////////////////////////////
+    
     lawOfCosinesComputeSidec: function (a, b, gamma) {
         var tmp = Math.cos(gamma);
         tmp *= 2 * a * b;
@@ -63,19 +23,7 @@ var WindCorrectionEquation = {
         return Math.sqrt(tmp);
     },
 
-    ////////////////////////////////////////////////////////////////////////////////
-    ///  @brief  
-    ///    Computes the Angle b when a, angle A, and b are known.
-    ///
-    ///  @param [in] <a> <length of side a>
-    ///
-    ///  @param [in] <A> <Angle of side A>
-    ///
-    ///  @param [in] <B> <length of side b>
-    ///
-    ///  @returns <angle opposite side B>
-    ///
-    ////////////////////////////////////////////////////////////////////////////////
+    
     lawOfSinesComputeAngle: function (a, A, b) {
         var tmp = Math.sin(A) * b;
         tmp /= a;

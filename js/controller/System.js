@@ -1,11 +1,3 @@
-//#include "System.h"
-//#include "string.h"
-//#include "time.h"
-
-// uncomment to run factory test
-// comment out for normal testing
-//#define _FACTORY_TEST
-
 // Names of battery status.
 CONST.BATTERY_STATUS = {
   DEAD       : 0,

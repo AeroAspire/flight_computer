@@ -1,39 +1,3 @@
-///////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
-//  
-//  Class Name: memoryScreen
-//  
-//   Copyright (c) ASA
-//  
-//    All Rights Reserved
-//  
-// @file    $URL: http://wally/svn/asa/CX-3/trunk/Firmware/calculator/ui/src/CX3ListItemBaseWidget.cpp $
-// @author  $Author: mike $
-// @version $Rev: 402 $
-// @date    $Date: 2011-06-07 07:39:44 -0700 (Tue, 07 Jun 2011) $
-// @brief   used to display trip planner main screen 
-////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
-
-//#include "prism_includes.h"
-//#include "calculator.h"
-//#include "CX3_UI_res.h"
-//#include "memoryScreen.h"
-//#include "widgetIDs.h"
-//#include "calc_utility.h"
-//#include <string.h>
-//#include <stdio.h>
-//
-//// Fix name issues with EWL
-//#ifdef _EWL_STRING_H
-//#define strnlen strnlen_s
-//#endif
-//
-//using namespace CX3Calculator;
-//
-//namespace CX3_UI
-//{
-
 CONST.MAX_MEMORY_ITEMS = 6;
 
 // Memory Functions:

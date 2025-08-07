@@ -1,25 +1,3 @@
-///
-// @file    $URL: http://wally/svn/asa/CX-3/trunk/Firmware/calculator/ui/include/calculatorFieldWidget.h $
-// @author  $Author: george $
-// @version $Rev: 685 $
-// @date    $Date: 2012-02-02 17:22:13 -0800 (Thu, 02 Feb 2012) $
-// @brief  Keeps track of current calculator function(s) and value, and performs calculations
-//
-
-//#include "CX3Calculator.h"
-//#include "CX3Keypad.h"
-//#include "formatHmsDms.h"
-//
-//// Fix name issues with EWL
-//#if defined(__EWL__)
-//#include <stdio.h>
-//#include <stdlib.h>
-//#include <cstring>
-//#include <math.h>
-//#include <string.h>
-//#define strnlen strnlen_s
-//#endif
-
 CONST.MAX_VALUE_INPUT_LENGTH = 8;
 CONST.MAX_VALUE_TEXT_LENGTH = CONST.MAX_VALUE_INPUT_LENGTH << 1;
 CONST.MAX_FULL_TEXT_LENGTH = CONST.MAX_VALUE_TEXT_LENGTH << 1;

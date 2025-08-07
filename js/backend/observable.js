@@ -1,9 +1,3 @@
-/*
-CX-3 - Flight Calculator
-Copyright (C) 2013 Aviation Supplies & Academics, Inc.
-Ported to javascript by Dean Brestel
-*/
-
 /**
  * @file
  * Class for Observer.

@@ -1,54 +1,13 @@
-///
-// @file    $URL: http://192.168.2.10/svn/ASA/CX-3/trunk/Firmware/calculator/model/include/AltitudeEquations.h $
-// @author  $Author: george $
-// @version $Rev: 733 $
-// @date    $Date: 2012-03-08 10:04:18 -0800 (Thu, 08 Mar 2012) $
-// @brief   Equations used for calcuating various altitude values
-//
-// NOTE that Equation instances must not have mutable state for this to work
-// (they get constructed once, globally)!
-//
-//#ifndef __INCLUDED_ALTITUDE_EQUATIONS_H
-//#define __INCLUDED_ALTITUDE_EQUATIONS_H
-//
-//#include "calculator.h"
-//#include "CX3Equations.h"
-//#include "variables.h"
-//#include "equations.h"
-//#include "math.h"
 
-
-////////////////////////////////////////////////////////////////////////////////
-///  
-///	Base class for the altitude equations.  Contains some common formulas.
-///
-////////////////////////////////////////////////////////////////////////////////
 var AltitudeEquation = {
-  ////////////////////////////////////////////////////////////////////////////////
-  ///  @brief
-  ///       compute an intermediate value that is used in a couple of the 
-  ///			altitude equations
-  ///
-  ///  @param [in] <barPressure> <double -in units of millibar (mb)>
-  ///
-  ///  @return <double - computed value of h>
-  ///
-  ////////////////////////////////////////////////////////////////////////////////
+  
   compute_h : function(barPressure) {
     return CONST.Tstd_div_L * (1 - (Math.pow((barPressure/CONST.StdPressure_mb),CONST.inv_gMRL)));
   }
 };
 
 
-////////////////////////////////////////////////////////////////////////////////
-///  
-///	Computes the Indicated Altitude when barometric pressure and Pressure
-///	altitude are known.
-///
-///	See the CX3Equations document for a dscription of this calculation, it is
-///	derived from the US Standard Atmosphere, 1976.
-///
-////////////////////////////////////////////////////////////////////////////////
+
 function ComputeIaltFromBarPresAndPalt(altOutput, barPressureInput, pressureAltInput) {
   Equation.call(this, altOutput, barPressureInput, pressureAltInput);
 }

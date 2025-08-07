@@ -1,30 +1,4 @@
-///
-// @file    $URL: http://192.168.2.10/svn/ASA/CX-3/trunk/Firmware/calculator/model/include/FuelEquations.h $
-// @author  $Author: george $
-// @version $Rev: 821 $
-// @date    $Date: 2012-05-14 11:26:04 -0700 (Mon, 14 May 2012) $
-// @brief   Declarations of equations to calculate fuel consumption variables.
-//
-// NOTE that Equation instances must not have mutable state for this to work
-// (they get constructed once, globally)!
-//
-//#ifndef __INCLUDED_FUEL_EQUATIONS_H
-//#define __INCLUDED_FUEL_EQUATIONS_H
-//
-//#include "LinearEquations.h"
-//#include "definedUnits.h"
 
-
-////////////////////////////////////////////////////////////////////////////////
-///  
-///  Computes Fuel Rate from Fuel Volume & Duration
-///  Also checks units
-///
-///    Rate = Volume/Duration
-///
-///     LinEqComputeMfromYandX::output = input1() / input2()
-///
-////////////////////////////////////////////////////////////////////////////////
 function ComputeRateFromFuelAndDuration(rateOutput, fuelInput, durationInput) {
   LinEqComputeMfromYandX.call(this, rateOutput, fuelInput, durationInput);
 }

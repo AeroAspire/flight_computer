@@ -1,9 +1,3 @@
-/*
-CX-3 - Flight Calculator
-Copyright (C) 2013 Aviation Supplies & Academics, Inc.
-Ported to javascript by Dean Brestel
-*/
-
 /**
  * @file
  * Class for Application.
@@ -77,10 +71,7 @@ function Application() {
   Screen.element.appendChild(this.listScreen_.ui);
   for (var i in CONST.equationScreens) {
     var title = CONST.equationScreens[i].title()
-    // CX3MenuItemWidget.prototype.Set = function(text, evt, param)
-    // @param [in] <text> <text to show for new list item>
-    // @param [in] <evt> <event to post when item is 'clicked'>
-    // @param [in] <param> <parameter to pass with specified event>
+    
     this.listScreen_.addItem(CONST.equationScreens[i].title(), Application.EVENTS.EQLIST_ITEM_KEYPRESSED, i);
   }
   this.listScreen_.owner = this;
@@ -90,10 +81,7 @@ function Application() {
   Screen.element.appendChild(this.listScreenWtBal_.ui);
   for (var i in CONST.equationScreensWtBal) {
     var title = CONST.equationScreensWtBal[i].title()
-    // CX3MenuItemWidget.prototype.Set = function(text, evt, param)
-    // @param [in] <text> <text to show for new list item>
-    // @param [in] <evt> <event to post when item is 'clicked'>
-    // @param [in] <param> <parameter to pass with specified event>
+    
     this.listScreenWtBal_.addItem(title, Application.EVENTS.EQLISTWTBAL_ITEM_KEYPRESSED, i);
   }
   this.listScreenWtBal_.owner = this;
@@ -181,16 +169,7 @@ Application.EVENTS = {
       // Change panels:
       app.activePanel = app.eqScreen_;
       
-      // // 'back' will return to equation list
-      // app.back_function = CONST.CX3_KEY.FLIGHT;
-
-      // multi-step 'back' function
-      // app.back_focus[0] = LastSelectedEQListIndex;  // update list focus
-      // app._function = CONST.CX3_KEY.FLIGHT;
-      // app.selected = LastSelectedEQListIndex+1;    // function main screen
-      // app.focus = 0;
-      // app.storeBackFunction();
-      // Signify that the event has been handled:
+      
       _details["handled"] = true;
     }
   },
@@ -199,9 +178,7 @@ Application.EVENTS = {
   }
 
 };
-/**
- * Static function.  Creates the global app object and starts it.
- */
+
 var app;
 Application.initialize = function() {
   if (DEBUG) {
@@ -218,12 +195,7 @@ Application.initialize = function() {
   document.addEventListener("cx3-keypress", app.uiKeyPressed, false);
 }
 
-// Application is a subclass of Parent:
-//Application.inheritsFrom(Parent);
 
-/**
- * Starts the application.
- */
 Application.prototype.start = function() {
   if (DEBUG) {
     console.log("Application.start");
@@ -558,10 +530,7 @@ Application.prototype.onKeyPress = function(_evt) {
           SetTimezone.copyFromValue(LastSelectedSetting - (CONST.SETTING_ID.ZONE_LOCAL - 4));
           // go back to 'time set' setting screen
           LastSelectedSetting = CONST.SETTING_ID.TIME_SET;
-          // set to list screen because current screen is eqScreen (causes viewport allocation problems)
-          // NOTE by Dean: this next line shouldn't be needed.
-          //setCurrentScreen(this.listScreen_);
-          // show 'time set' screen
+         
           this.eqScreen_.ShowSettingOptions(CONST.SETTING_ID.TIME_SET);
           // reset back function
           this.back_function = CONST.CX3_KEY.SETTINGS;
@@ -689,15 +658,7 @@ Application.prototype.onEventTripLegRemove = function(_evt) {
   this.eqScreen_.SetClearTripLegVariables(_evt.param, true);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-///  @brief  
-///    A memory function was selected - exit memory screen
-///
-///  @param [in] <Event> <data about which memory funcion was clicked>
-///
-///  @return <always returns 0 (1 causes Prism to terminate)>
-///
-////////////////////////////////////////////////////////////////////////////////
+
 Application.prototype.onEventMemoryFunction = function(Event) {
   // send event param to memory function for processing
   this.memScreen_.ProcessMemoryFunction(Event.param);
@@ -708,12 +669,7 @@ Application.prototype.onEventMemoryFunction = function(Event) {
   // restore last screen
   this.activePanel = this.lastFunctionPanel_;
 
-  //restore last status bar function
-  // TODO: Dean - is this needed?
-  //statusBar_->SetLastFunction();
-
-  //clear memory recall flag (only valid for input one)
-  //MemInputOne.valRecalled = false;
+  
 
   return 0;
 }
@@ -751,16 +707,7 @@ Object.defineProperty(Application.prototype, "activePanel", {
   }
 });
 
-////////////////////////////////////////////////////////////////////////////////
-///  @brief  
-///    A Setting in the main Setting Screen was selected - show options for
-///    selected setting
-///
-///  @param [in] <Event> <data about which list element was clicked>
-///
-///  @return <always returns 0 (1 causes Prism to terminate)>
-///
-////////////////////////////////////////////////////////////////////////////////
+
 Application.prototype.onEventSettingSelected = function(Event) {
   if (DEBUG) {
     console.log("Application.prototype.onEventSettingSelected");
@@ -775,16 +722,7 @@ Application.prototype.onEventSettingSelected = function(Event) {
   // 'back' from memory screen will return to main settings screen
   this.back_function = CONST.CX3_KEY.SETTINGS;
 
-  // multi-step 'back' function
-  /*
-  back_focus[0] = LastSelectedSetting;  // update list focus
-  function = 's';
-  selected = LastSelectedSetting+1;    // function main screen
-  focus = 0;
-  storeBackFunction();
-  */
-  // update focus only - always go back to main settings screen (not individual screens)
-  // don't update focus if setting timezone - leave focus on 'time set'
+  
   if((LastSelectedSetting != CONST.SETTING_ID.ZONE_LOCAL) && (LastSelectedSetting != CONST.SETTING_ID.ZONE_DEST)) {
     this.back_focus[0] = LastSelectedSetting;
   }
@@ -800,28 +738,12 @@ Application.prototype.onEventSettingSelected = function(Event) {
   return 0;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-///  @brief  
-///    An option was selected for the current selected setting - check for new 
-///    setting and update 
-///
-///  @param [in] <Event> <data about which list element was clicked>
-///
-///  @return <always returns 0 (1 causes Prism to terminate)>
-///
-////////////////////////////////////////////////////////////////////////////////
+
 Application.prototype.onEventOptionSelected = function(Event) {
   if (DEBUG) {
     console.log("Application.prototype.onEventOptionSelected");
   }
-  /*
-  Unit const * new_setting;
-  Time clock_time;
-  value_t new_time;
-  UserVariable_t user_var;
-  Variable * var_temp;
-  uint8_t i, leg_status;
-  */
+  
   var new_setting;
   var clock_time = new Time();
   var new_time;
@@ -978,10 +900,7 @@ Application.prototype.onEventOptionSelected = function(Event) {
   // User Data - check for Store or Recall NV data
   else if (CONST.SETTINGS[LastSelectedSetting] == UserData) {
     new_setting =  CONST.SETTINGS[LastSelectedSetting].kind().getUnit(Event.param);
-    // save user data
-    // TODO: confirm before saving?
-    // TODO: indicate success/failure? (no return values for UserMemSave/Load)
-    // TODO: create routines to save/load data before/after calling UserMemSave/UserMemLoad
+   
     if (new_setting == userData_save) {
       // CONST.SETTINGS: CONST.SETTINGS[0] (theme) to CONST.SETTINGS[6] (unit changes)
       // NOTE: CONST.SETTINGS ID matches NV addr up to Favorites
@@ -1009,8 +928,7 @@ Application.prototype.onEventOptionSelected = function(Event) {
         current_option = CONST.TIME_ZONE_UTC;
       nv_data_view.setUint8(NV_ADDR.SETTING.ZONE_DEST, current_option, true);
 
-      // CONST.SETTINGS: Aircraft Profile
-      // Instrument calibration - default 1.0 and 'copied' 
+  
       user_var = new UserVariable();
       user_var.input = CONST.USER_VAR.INPUT;  // instrument cal always has value
       user_var.unit = 0;          // & unit is always zero (only one unit)
@@ -1205,340 +1123,7 @@ Application.prototype.onEventOptionSelected = function(Event) {
     }
     else if (new_setting == userData_recall) {
 
-      // // only load if NV data is valid
-      // if (UserMemValid()) {
-      //   UserMemLoad();
-      //   var saved_option;
-
-      //   // CONST.SETTINGS: CONST.SETTINGS[0] (theme) to CONST.SETTINGS[6] (unit changes)
-      //   // NOTE: CONST.SETTINGS ID matches NV addr up to Favorites (7)
-      //   for(index = 0; index < CONST.SETTING_ID.FAVORITE; index++) {
-      //     // get current and saved setting values (unit index)
-      //     current_option = CONST.SETTINGS[index].kind().getDefaultUnit();
-      //     saved_option = nv_data_view.getUint8(index, true);
-
-      //     // update setting if changed - SKIP CLOCK (not saved)
-      //     if ((current_option != saved_option) && (CONST.SETTINGS[index] != Clock)) {
-      //       new_setting =  CONST.SETTINGS[index].kind().getUnit(saved_option);
-      //       CONST.SETTINGS[index].kind().setDefaultUnit(new_setting);
-
-      //       // set new theme
-      //       if (CONST.SETTINGS[index] == Theme) {
-      //         if (new_setting == theme_color) {
-      //           Screen.theme = CONST.THEMES[1];
-      //         }
-      //         else if (new_setting == theme_white) {
-      //           Screen.theme = CONST.THEMES[2];
-      //         }
-      //         else {
-      //           Screen.theme = CONST.THEMES[0];
-      //         }
-      //         // re-draw status bar
-      //         //this.statusBar_.Invalidate();
-      //       }
-
-      //       // set backlight setting
-      //       if (CONST.SETTINGS[index] == Backlight) {
-      //         if (new_setting == backlight_daylight) {
-      //           SetScreenBrightness(CONST.BACKLIGHT_VALUE.LOW);
-      //           SetTouchBrightness(CONST.BACKLIGHT_VALUE.OFF);
-      //         }
-      //         else if (new_setting == backlight_night) {
-      //           SetScreenBrightness(CONST.BACKLIGHT_VALUE.HIGH);
-      //           SetTouchBrightness(CONST.BACKLIGHT_VALUE.LOW);
-      //         }
-      //         else if (new_setting == backlight_dusk) {
-      //           SetScreenBrightness(CONST.BACKLIGHT_VALUE.MEDIUM_HIGH);
-      //           SetTouchBrightness(CONST.BACKLIGHT_VALUE.HIGH);
-      //         }
-      //         else {
-      //           SetScreenBrightness(CONST.BACKLIGHT_VALUE.MEDIUM);      // defuault normal
-      //           SetTouchBrightness(CONST.BACKLIGHT_VALUE.OFF);
-      //         }
-      //       }
-
-      //       // set scrolling speed
-      //       if (CONST.SETTINGS[LastSelectedSetting] == ScrollSpeed) {
-      //         if (new_setting == scroll_fast)
-      //           SetScrollBarSpeed(CONST.SCROLL_BAR_SPEED.FAST);
-      //         else if (new_setting == scroll_med)
-      //           SetScrollBarSpeed(CONST.SCROLL_BAR_SPEED.MEDIUM);
-      //         else
-      //           SetScrollBarSpeed(CONST.SCROLL_BAR_SPEED.SLOW);
-      //       }
-
-      //       // set scroll bar function
-      //       if (CONST.SETTINGS[LastSelectedSetting] == ScrollFunction) {
-      //         if (new_setting == slider_slide)
-      //           SetScrollBarFunction(CONST.SCROLL_BAR_FUNCTION.SCROLL);
-      //         else if (new_setting == slider_tap)
-      //           SetScrollBarFunction(CONST.SCROLL_BAR_FUNCTION.TAP);
-      //         else
-      //           SetScrollBarFunction(CONST.SCROLL_BAR_FUNCTION.BOTH);
-      //       }
-
-      //       // set default units
-      //       if (CONST.SETTINGS[LastSelectedSetting] == DefaultUnits) {
-      //         this.eqScreen_.SetDefaultUnits(Event.param);
-
-      //         // exit here if customizing default units
-      //         if (new_setting == units_custom) {
-      //           // re-set current screen
-      //           this.activePanel = this.eqScreen_;
-      //           //return 0;
-      //         }
-      //       }
-      //     }
-      //   }
-      //   // CONST.SETTINGS: Favorite
-      //   saved_option = nv_data_view.getUint8(NV_ADDR.SETTING.FAVORITE, true);
-      //   if (saved_option != 255)
-      //     Favorite.copyFromValue(saved_option);
-      //   else
-      //     Favorite.clearValue();
-
-      //   // CONST.SETTINGS: Timezones
-      //   saved_option = nv_data_view.getUint8(NV_ADDR.SETTING.ZONE_LOCAL, true);
-      //   ZoneLocal.copyFromValue(saved_option);
-      //   time_local.setName(CONST.TIMEZONES[saved_option].name);
-      //   time_local.setOffset(CONST.TIMEZONES[saved_option].offset);
-      //   saved_option = nv_data_view.getUint8(NV_ADDR.SETTING.ZONE_DEST, true);
-      //   time_dest.setName(CONST.TIMEZONES[saved_option].name);
-      //   time_dest.setOffset(CONST.TIMEZONES[saved_option].offset);
-      //   ZoneDest.copyFromValue(saved_option);
-      //   // update status bar clock display
-      //   ClockUpdate.changed();
-
-      //   // CONST.SETTINGS: Aircraft Profile
-      //   // Instrument calibration - default 1.0 and 'copied' 
-      //   user_var = nv_data_view.getUserVariable(NV_ADDR.AIRCRAFT_CAL_K, true);
-      //   user_var.input &= (CONST.USER_VAR.INPUT | CONST.USER_VAR.COPIED);
-      //   // Check for new RecoveryFactor (K) setting
-      //   if (user_var.input & CONST.USER_VAR.INPUT) {
-
-      //     if ((user_var.value >= 0.7) && (user_var.value <= 1.0)) {
-      //       if (user_var.input & CONST.USER_VAR.COPIED)
-      //         ProfileRecoveryFactor.setCopied(true);
-      //       else
-      //         ProfileRecoveryFactor.setCopied(false);
-      //       ProfileRecoveryFactor.copyFromValue(user_var.value);
-      //       //only set new value if value changed
-      //       if (RecoveryFactor.value() != user_var.value) {
-      //         RecoveryFactor.clearValue();
-      //         RecoveryFactor.copyFromValue(user_var.value);
-      //       }
-      //     }
-      //     else {
-      //       // invalid value - clear 
-      //       ProfileRecoveryFactor.clearValue();
-      //     }
-      //   }
-      //   // If value cleared or invalid, re-set to current setting & show as copied
-      //   if (ProfileRecoveryFactor.hasNoValue()) {
-      //     ProfileRecoveryFactor.setCopied(true);
-      //     ProfileRecoveryFactor.copyFromValue(RecoveryFactor.value());
-      //   }
-      //   // Aircraft RF (weight & balance reduction factor)
-      //   user_var = nv_data_view.getUserVariable(NV_ADDR.AIRCRAFT_RF, true);
-      //   AircraftRF.clearValue();
-      //   if (user_var.input & CONST.USER_VAR.INPUT)
-      //     AircraftRF.copyFromValue(user_var.value);
-      //   // Rest of aircraft profile variables: use aircraft equations
-      //   // clear all variables before recalling saved values
-      //   var pEq_unit = CONST.aircraftEqus;
-      //   for (var i in pEq_unit) {
-      //     var_temp = pEq_unit[i].getOutput();
-      //     var_temp.clearValue();
-      //   }
-      //   // recall saved values and preferred units
-      //   pEq_unit = CONST.aircraftEqus;
-      //   var nv_addr = NV_ADDR.AIRCRAFT_EQUATIONS_START;
-      //   for (var i in pEq_unit) {
-      //     user_var = nv_data_view.getUserVariable(nv_addr, true);
-      //     var_temp = pEq_unit[i].getOutput();
-      //     // recall input values only
-      //     if (user_var.input & CONST.USER_VAR.INPUT)
-      //       var_temp.setValue(user_var.value);
-      //     // recall preferred nits
-      //     new_setting = var_temp.kind().getUnit(user_var.unit);
-      //     pEq_unit[i].setNewPreferredUnits(new_setting);
-
-      //     nv_addr += CONST.USER_VARIABLE_SIZE;
-      //   }
-      //   // Fuel Type default value: 6.0 (av gas LB/US GAL)
-      //   if (!AircraftFuelType.hasValue()) {
-      //     AircraftFuelType.copyFromValue(6.0/8.3454);    //default Av Gas (6.0 is LB/GAL from CX-2 manual, default uits KG/L
-      //     AircraftFuelType.setLock(false);
-      //   }
-
-      //   // Weight & Balance using aircraft profile: use aircraft Weight & Balance equations
-      //   // set pointer to Aircraft Weight & Balance equations 
-      //   pEq_unit = CONST.aircraftWeightBalanceEqus;
-      //   nv_addr = NV_ADDR.WT_BAL_AIRCRAFT_START;
-      //   // inputs: use aircraft Weight & Balance equations up to max aircraft profile inputs
-      //   for(i = 0; i < CONST.MAX_AIRCRAFT_INPUT_ITEMS; i++) {
-      //     // recall saved values and preferred units
-      //     user_var = nv_data_view.getUserVariable(nv_addr, true);
-      //     // get equation's output variable
-      //     var_temp = pEq_unit[i].getOutput();
-      //     // clear value (and lock)
-      //     var_temp.clearValue();
-      //     // recall input values only, otherwise clear value
-      //     if (user_var.input & CONST.USER_VAR.INPUT)
-      //       var_temp.setValue(user_var.value);
-      //     // recall preferred nits
-      //     new_setting =  var_temp.kind().getUnit(user_var.unit);
-      //     pEq_unit[i].setNewPreferredUnits(new_setting);
-
-      //     nv_addr += CONST.USER_VARIABLE_SIZE;
-      //   }
-      //   pEq_unit = pEq_unit.slice(i);
-      //   // outputs, intermediate, dummy equations: save/recall preffered units only
-      //   //    use aircraft Weight & Balance equations after input items and up to max aircraft variables
-      //   nv_addr = NV_ADDR.WT_BAL_AIRCRAFT.OUTPUTS;
-      //   for(i = CONST.MAX_AIRCRAFT_INPUT_ITEMS; i < CONST.ALL_ARICRAFT_VARIABLES; i++) {
-      //     // recall preferred units
-      //     user_var.unit = nv_data_view.getUint8(nv_addr, true);
-      //     // get equation's output variable
-      //     var_temp = pEq_unit[i].getOutput();
-      //     // set preferred units to recalled value
-      //     new_setting = var_temp.kind().getUnit(user_var.unit);
-      //     pEq_unit[i].setNewPreferredUnits(new_setting);
-
-      //     nv_addr++;
-      //   }
-
-      //   // Weight & Balance using items
-      //   // recall # active and max active items, and individual item status
-      //   ItemsActive = nv_data_view.getUint8(NV_ADDR.WT_BAL_ITEMS_ACTIVE, true);
-      //   ItemActiveMax = nv_data_view.getUint8(NV_ADDR.WT_BAL_ITEMS_ACTIVE_MAX, true);
-      //   for (i = 0; i < CONST.MAX_ITEMS; i++) {
-      //     ItemStatus[i] = nv_data_view.getUint8(NV_ADDR.WT_BAL_ITEMS.STATUS + i, true);
-      //   }
-      //   // re-set Item units (display no item, add, or remove)
-      //   for(i = 0; i < CONST.MAX_ITEMS; i++) {
-      //     if ((i == 0) && (ItemStatus[i] == 2) && (ItemsActive <= 1))
-      //       ItemUnits[i].ptr = item_noText;
-      //     else if (ItemStatus[i] == 2)
-      //       ItemUnits[i].ptr = item_remove;
-      //     else
-      //       ItemUnits[i].ptr = item_add;
-      //     CONST.ITEMS[i].setPreferredUnit(ItemUnits[i]);
-      //   }
-      //   // weight & balance RF (reduction factor)
-      //   user_var = nv_data_view.getUserVariable(NV_ADDR.WT_BAL_ITEMS_RF, true);
-      //   ReductionFactor.clearValue();
-      //   if (user_var.input & CONST.USER_VAR.INPUT)
-      //     ReductionFactor.copyFromValue(user_var.value);
-      //   // set pointer to  Weight & Balance equations 
-      //   // clear all variables before recalling saved values
-      //   pEq_unit = CONST.weightbalanceEqus;
-      //   for(i = 0; i < (CONST.MAX_ITEMS * CONST.VARIABLES_PER_ITEM); i++) {
-      //     var_temp = pEq_unit[i].getOutput();
-      //     var_temp.clearValue();
-      //   }
-      //   // item inputs: use aircraft Weight & Balance equations ONLY up to max aircraft input items
-      //   pEq_unit = CONST.weightbalanceEqus;
-      //   nv_addr = NV_ADDR.WT_BAL_ITEMS.VARIABLES;
-      //   for(i = 0; i < (CONST.MAX_ITEMS * CONST.VARIABLES_PER_ITEM); i++) {
-      //     user_var = nv_data_view.getUserVariable(nv_addr, true);
-      //     var_temp = pEq_unit[i].getOutput();
-      //     // recall input values only
-      //     if (user_var.input & CONST.USER_VAR.INPUT)
-      //       var_temp.setValue(user_var.value);
-      //     // recall preferred nits
-      //     new_setting = var_temp.kind().getUnit(user_var.unit);
-      //     pEq_unit[i].setNewPreferredUnits(new_setting);
-
-      //     nv_addr += CONST.USER_VARIABLE_SIZE;
-      //   }
-      //   pEq_unit = pEq_unit.slice(i);
-      //   // outputs, intermediate, dummy equations: save/recall preffered units only
-      //   //    use Weight & Balance equations after input item variables
-      //   nv_addr = NV_ADDR.WT_BAL_ITEMS.OUTPUT_EQU;
-      //   for(i = 0; i < CONST.ITEMS_OUTPUT_EQUATIONS; i++) {
-      //     user_var.unit = nv_data_view.getUint8(nv_addr, true);
-      //     var_temp = pEq_unit[i].getOutput();
-      //     // recall preferred Units
-      //     new_setting =  var_temp.kind().getUnit(user_var.unit);
-      //     pEq_unit[i].setNewPreferredUnits(new_setting);
-
-      //     nv_addr++;
-      //   }
-
-      //   // Trip Planner
-      //   // recall individual leg status
-      //   this.tripScreen_.RecallTripPlannerData();
-      //   // trip legs - recall input value, prefered unit, and if calculated
-      //   nv_addr = NV_ADDR.TRIP.LEG_1;  // set NV address pointer 
-      //   for(j = 0; j < CONST.MAX_TRIP_PLAN_LEGS; j++) {
-      //     // set equation pointer
-      //     if (j == 1)
-      //       pEq_unit = CONST.tripPlanLeg2Equs;
-      //     else if (j == 2)
-      //       pEq_unit = CONST.tripPlanLeg3Equs;
-      //     else if (j == 3)
-      //       pEq_unit = CONST.tripPlanLeg4Equs;
-      //     else
-      //       pEq_unit = CONST.tripPlanLeg1Equs;
-      //     // get leg status
-      //     leg_status = nv_data_view.getUint8((NV_ADDR.TRIP.LEGS_ACTIVE+j), true);
-      //     // item inputs: use trip leg equations ONLY up to trip leg input items
-      //     for(i = 0; i < CONST.TRIP_LEG_VARIABLES; i++) {
-
-      //       var_temp = pEq_unit[i].getOutput();
-      //       // inputs - recall value (if input) and set 'copied' indication
-      //       if (i < CONST.TRIP_LEG_INPUTS) {
-      //         // get value, units, input/copied
-      //         user_var = nv_data_view.getUserVariable(nv_addr, true);
-      //         // clear current value
-      //         var_temp.clearValue();
-      //         // check for 'calculated' value (new leg depart time set to last leg ETA)
-      //         if (user_var.input & CONST.USER_VAR.CALCULATED) {
-      //           var_temp.setValue(user_var.value, true);
-      //         }
-      //         else if (user_var.input & CONST.USER_VAR.INPUT) {
-      //           var_temp.setValue(user_var.value);
-      //           // set 'copied' indicator
-      //           if (user_var.input & CONST.USER_VAR.COPIED)
-      //             var_temp.setCopied(true);
-      //         }
-
-      //         nv_addr += CONST.USER_VARIABLE_SIZE;
-      //       }
-      //       else {
-      //         // geat preferred units only
-      //         user_var.unit = nv_data_view.getUint8(nv_addr, true);
-
-      //         nv_addr++;
-      //       }
-      //       // set/clear variable's 'active' indication 
-      //       if (leg_status == CONST.TRIP_PLAN_LEG_STATUS_EDIT)
-      //         var_temp.setActive(true);
-      //       else
-      //         var_temp.setActive(false);
-      //       // recall preferred units (inputs AND outputs)
-      //       new_setting =  var_temp.kind().getUnit(user_var.unit);
-      //       pEq_unit[i].setNewPreferredUnits(new_setting);
-      //     }
-      //   }
-      //   // trip planner totals - save/recall prefered units only
-      //   nv_addr = NV_ADDR.TRIP.OUTPUTS;  // set NV address pointer
-      //   pEq_unit = CONST.tripPlanTotalEqus;  // & equation pointer
-      //   for(var j = 0; j < CONST.MAX_TRIP_PLAN_LEGS; j++) {
-      //     // recall preferred units
-      //     user_var.unit = nv_data_view.getUint8(nv_addr, true);
-      //     var_temp = pEq_unit[j].getOutput();
-      //     new_setting =  var_temp.kind().getUnit(user_var.unit);
-      //     pEq_unit[j].setNewPreferredUnits(new_setting);
-
-      //     nv_addr++;
-      //   }
-
-      // }
-      // else {
-      //   //TODO: display mem load failure on display
-      // }
+     
     
     }
 
@@ -1634,12 +1219,7 @@ Application.prototype.onEventOptionSelected = function(Event) {
   return 0;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-///  @brief
-///      store current function in multi-step back function variables
-///
-///
-////////////////////////////////////////////////////////////////////////////////
+
 Application.prototype.storeBackFunction = function() {
   // don't store same function twice
   if ((this.back_history[0] != this._function) || (this.back_selected[0] != this.selected)) {
@@ -1657,12 +1237,7 @@ Application.prototype.storeBackFunction = function() {
   }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-///  @brief
-///      recall last saved back function 
-///
-///
-////////////////////////////////////////////////////////////////////////////////
+
 Application.prototype.recallBackFunction = function() {
   // last function in back_history[1]
   var last = this.back_history[1];
@@ -1697,8 +1272,6 @@ Application.prototype.recallBackFunction = function() {
     }
   }
   else if ((active == CONST.CX3_KEY.FLIGHT) || (active == CONST.CX3_KEY.PLAN)) {
-    // if no 'back' function on active equation or trip leg - go back to main screen
-    // & set selected to zero (and focus to current equation) so back function not re-saved
     if (this.back_selected[0] != 0) {
       this.back_focus[0] = this.back_selected[0];
       this.back_selected[0] = 0;

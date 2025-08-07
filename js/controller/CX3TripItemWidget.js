@@ -1,34 +1,3 @@
-///
-// @file    $URL: http://wally/svn/asa/CX-3/trunk/Firmware/calculator/ui/src/CX3MenuItemWidget.cpp $
-// @author  $Author: mike $
-// @version $Rev: 402 $
-// @date    $Date: 2011-06-07 07:39:44 -0700 (Tue, 07 Jun 2011) $
-// @brief   Widget to be used in a menu list.  Elements have properties (e.g. text) and let
-//      their owners know when they are 'clocked'
-//
-
-//#include "CX3TripItemWidget.h"
-//#include <stdlib.h>
-//#include <cassert>
-//
-//namespace CX3_UI
-//{
-/// @brief
-/// Event table for this class.  The events below have special functions that override the 
-/// base implementation.
-//pm_event_table_entry CX3TripItemWidgetEvents[] = {
-//  { PM_EVENT_KEYPAD_PUSH,    PM_EVENT_HANDLER(&CX3TripItemWidget::OnEventKeypadPush)},
-//    { 0, NULL}   /* array terminator */
-//};
-
-////////////////////////////////////////////////////////////////////////////////
-///  @brief  
-///    Builds a default CX3MenuItemWidget.  
-///
-///  Memory is only allocated during construction and will be reused throughout
-///    the lifetime of this object.
-///
-////////////////////////////////////////////////////////////////////////////////
 function CX3TripItemWidget() {
   Widget.call(this);
 
@@ -44,15 +13,7 @@ function CX3TripItemWidget() {
 // CX3TripItemWidget is a subclass of Widget:
 CX3TripItemWidget.inheritsFrom(Widget);
 
-////////////////////////////////////////////////////////////////////////////////
-///  @brief  
-///    Clean up after ourselves and remove memory that we may have allocated.
-///
-////////////////////////////////////////////////////////////////////////////////
-//CX3TripItemWidget::~CX3TripItemWidget() {
-//  Destroy(fieldName_);
-//  Destroy(value_);
-//}
+
 CX3TripItemWidget.prototype.Clear = function() {
   this.fieldName.innerText = "";
   this.fieldName.textContent = "";

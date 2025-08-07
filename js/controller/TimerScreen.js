@@ -1,49 +1,4 @@
-///////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
-//  
-//  Class Name: listScreen
-//  
-//   Copyright (c) ASA
-//  
-//    All Rights Reserved
-//  
-//  Notes:
-///////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
 
-//#include "prism_includes.h"
-//#include "calculator.h"
-//#include "CX3_UI_res.h"
-//#include "timerScreen.h"
-//#include "widgetIDs.h"
-//#include "calc_utility.h"
-//#include "formatHmsDms.h"
-//#include <string.h>
-//
-//// Fix name issues with EWL
-//#ifdef _EWL_STRING_H
-//#define strnlen strnlen_s
-//#endif
-
-/// @brief
-/// Event table for this class.  The events below have special functions that override the 
-/// base implementation.
-//pm_event_table_entry timerScreenEvents[] = {
-//TimerScreen.prototype.OnEventHide = function)},
-//TimerScreen.prototype.OnEventKeypadPush = function)},
-//TimerScreen.prototype.OnEventTimer = function)},
-//  { 0, NULL}   /* array terminator */
-//};
-
-////////////////////////////////////////////////////////////////////////////////
-///  @brief  
-///    Builds a default timerScreen panel and creates the children.  Memory
-///    is only allocated during construction and will be reused throughout
-///    the lifetime of this object.
-///
-///  @param [in] <size> <Display size for this panel>
-///
-////////////////////////////////////////////////////////////////////////////////
 function TimerScreen() {
   Panel.call(this);
   this.title = "TIMER";

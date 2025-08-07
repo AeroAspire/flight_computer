@@ -1,37 +1,3 @@
-///
-// @file    $URL: http://wally/svn/asa/CX-3/trunk/Firmware/calculator/model/src/CX3Equations.cpp $
-// @author  $Author: george $
-// @version $Rev: 658 $
-// @date    $Date: 2012-01-11 17:14:15 -0800 (Wed, 11 Jan 2012) $
-// @brief   CX3 Equations grouped by equation's output variable's unit
-//        Used to reset or change default units globally
-//
-//#include "CX3Equations.h"
-//#include "definedVariables.h"
-//#include "GroundSpeedEquations.h"
-//#include "AltitudeEquations.h"
-//#include "CloudBaseEquations.h"
-//#include "StdAtmosphereEquations.h"
-//#include "FuelEquations.h"
-//#include "GlideEquations.h"
-//#include "CompassHeadingEquations.h"
-//#include "WindCorrectionEquations.h"
-//#include "AirSpeedEquations.h"
-//#include "WeightAndBalanceEquations.h"
-//#include "RhumbLineEquations.h"
-//#include "TripPlannerEquations.h"
-//
-//#ifdef __EWL_CPP__
-//#pragma opt_usedef_mem_limit 560
-//#endif
-//
-//using namespace Calculator;
-//
-//namespace CX3Equations
-//{
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// Output Unit -  GroundSpeed
 CONST.groundspeedUnitEqus = [
   computeSpeed,
   computeSpeedFromROCandAOC,
@@ -42,8 +8,6 @@ CONST.groundspeedUnitEqus = [
   computeGndSpeedLeg4,
 ];
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// Output Unit -  Airspeed
 CONST.airspeedUnitEqus = [
   computeTASFromTrueTempAndMach,
   computeCASFromPAltAndMach,

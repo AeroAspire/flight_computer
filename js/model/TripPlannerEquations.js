@@ -1,31 +1,4 @@
-///
-// @file    $URL: http://wally/svn/asa/CX-3/trunk/Firmware/calculator/model/include/GroundSpeedEquations.h $
-// @author  $Author: george $
-// @version $Rev: 581 $
-// @date    $Date: 2011-11-28 15:10:52 -0800 (Mon, 28 Nov 2011) $
-// @brief   Declarations of equations used by trip planner but not declared elsewhere
-//
-// NOTE that Equation instances must not have mutable state for this to work
-// (they get constructed once, globally)!
-//
-//#ifndef __INCLUDED_TRIP_PLANNER_EQUATIONS_H
-//#define __INCLUDED_TRIP_PLANNER_EQUATIONS_H
-//
-//#include "definedUnits.h"
-//#include "variables.h"
-//#include "equations.h"
-//#include "LinearEquations.h"
-//#include "CX3Equations.h"
-//#include "calculator.h"
 
-
-////////////////////////////////////////////////////////////////////////////////
-///  
-///  Compute Leg ETA 
-///
-/// TODO: change units to 'time' and set prefered unit to timezone (generic if just one permitted)
-///
-////////////////////////////////////////////////////////////////////////////////
 function ComputeETAfromTimeAndStart(ETAoutput, timeInput, startInput) {
   Equation.call(this, ETAoutput, timeInput, startInput);
 }

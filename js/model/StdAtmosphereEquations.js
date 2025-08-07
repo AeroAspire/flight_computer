@@ -1,40 +1,6 @@
-///
-// @file    $URL: http://192.168.2.10/svn/ASA/CX-3/trunk/Firmware/calculator/model/include/StdAtmosphereEquations.h $
-// @author  $Author: george $
-// @version $Rev: 676 $
-// @date    $Date: 2012-01-26 15:05:00 -0800 (Thu, 26 Jan 2012) $
-// @brief   Equations used for calcuating various altitude values
-//
-// NOTE that Equation instances must not have mutable state for this to work
-// (they get constructed once, globally)!
-//
-//#ifndef __INCLUDED_STDATMOSPHERE_EQUATIONS_H
-//#define __INCLUDED_STDATMOSPHERE_EQUATIONS_H
-//
-//#include "calculator.h"
-//#include "CX3Equations.h"
-//#include "variables.h"
-//#include "equations.h"
-//#include "math.h"
 
-
-////////////////////////////////////////////////////////////////////////////////
-///  
-///  Base class for the altitude equations.  Contains some common formulas.
-///
-////////////////////////////////////////////////////////////////////////////////
 var StdAtmosphereEquation = {
-    ////////////////////////////////////////////////////////////////////////////////
-    ///  @brief
-    ///       Compute the temperature at a height within a particular atmospheric
-    ///      layer.
-    ///
-    ///  @param [in] <barPressure> <in units of millibar (mb)>
-    ///  @param [in] <layer> <int - which atmospheric layer>
-    ///
-    ///  @return <temperature at specified height, in degrees K>
-    ///
-    ////////////////////////////////////////////////////////////////////////////////
+    
     compute_temp : function(altitude, layer) {
       // verify that the arguments are valid before calculating...
       if (layer < CONST.atmLayerData.length && altitude >= CONST.atmLayerData[layer].StartHeight && altitude < CONST.atmLayerData[layer].EndHeight) {
@@ -47,12 +13,7 @@ var StdAtmosphereEquation = {
     }
 };
 
-////////////////////////////////////////////////////////////////////////////////
-///  
-///  Computes temperature in the standard atmospheric model (1976)
-///  when a height is given.
-///
-////////////////////////////////////////////////////////////////////////////////
+
 function ComputeTempfromAltitude(tempOut, altitudeInput) {
   Equation.call(this, tempOut, altitudeInput);
 }

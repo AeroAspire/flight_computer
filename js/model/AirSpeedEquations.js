@@ -1,46 +1,18 @@
-/*
-   CX-3 - Flight Calculator
-   Copyright (C) 2013 Aviation Supplies & Academics, Inc.
-   Ported to javascript by Dean Brestel
- */
+
 
 /**
  * @file
  * Equations used for calcuating various airspeed values
  */
 
-////////////////////////////////////////////////////////////////////////////////
-///  
-///  Base class for the airspeed equations.  Contains some common formulas.
-///
-////////////////////////////////////////////////////////////////////////////////
+
 var AirspeedEquation = {
-  ////////////////////////////////////////////////////////////////////////////////
-  ///  @brief
-  ///       compute speed of sound at a given temperature
-  ///        using CS_0 speed of sound at 0 m (std temp at 0 M = 15 C)
-  ///
-  ///  @param [in] <trueTemp> <double - in units of kelvin (K)>
-  ///
-  ///  @return <double - computed value of speed of sound (cs)>
-  ///
-  ////////////////////////////////////////////////////////////////////////////////
+  
   compute_sound_speed : function(trueTemp) {
     return Math.sqrt(CONST.Gamma * CONST.R / CONST.M) * Math.sqrt(trueTemp);
   },
 
-  ////////////////////////////////////////////////////////////////////////////////
-  ///  @brief
-  ///       compute per unit pitot pressure rise dp from Calibrated Air Speed
-  ///        using CS_0 speed of sound at 0 m (std temp at 0 M = 15 C)
-  ///
-  ///     dp = StdPressure_mb*{[1 + 0.2*(CAS/CS_0)^2]^3.5 - 1}
-  ///
-  ///  @param [in] <calAirSpeed> <double - in units of meters/second (M/S)>
-  ///
-  ///  @return <double - computed per unit pitot pressure rise dp>
-  ///
-  ////////////////////////////////////////////////////////////////////////////////
+  
   compute_dp_from_CAS : function(calAirSpeed) {
     var dp;
     var val;

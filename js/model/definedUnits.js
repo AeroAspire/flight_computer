@@ -1,21 +1,4 @@
-///
-// @file    $URL: http://192.168.2.10/svn/ASA/CX-3/trunk/Firmware/calculator/model/src/definedUnits.cpp $
-// @author  $Author: george $
-// @version $Rev: 921 $
-// @date    $Date: 2013-06-28 14:10:19 -0700 (Fri, 28 Jun 2013) $
-// @brief
-//
 
-// A note on the units:
-// The base unit of Dimension objects is what is used in calcuations.  All the constants 
-// and equations depend on this base unit and any changes to it will likely cause
-// some problems.  It is far from ideal to have such a tight coupling.  Further refactoring
-// should fix this.
-
-// NOTE: most unit dimensions have a default pointer below to initialize or globally set the unit 
-// for each dimension
-
-// airSpeed
 var air_speed = new Dimension('Air Speed', 2, 'M/S'); // base unit is meters/sec
 var knots_as = new Unit('KTS', air_speed, 0.51444444);
 var sm_per_hour_as = new Unit('MPH', air_speed, 0.44704);

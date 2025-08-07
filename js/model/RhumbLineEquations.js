@@ -1,42 +1,8 @@
-///
-// @file    $URL: http://wally/svn/asa/CX-3/trunk/Firmware/calculator/model/include/AltitudeEquations.h $
-// @author  $Author: george $
-// @version $Rev: 581 $
-// @date    $Date: 2011-11-28 15:10:52 -0800 (Mon, 28 Nov 2011) $
-// @brief   Equations used for calcuating various altitude values
-//
-// NOTE that Equation instances must not have mutable state for this to work
-// (they get constructed once, globally)!
-//
-//#ifndef __INCLUDED_RHUMB_LINE_EQUATIONS_H
-//#define __INCLUDED_RHUMB_LINE_EQUATIONS_H
-//
-//#include "calculator.h"
-//#include "CX3Equations.h"
-//#include "variables.h"
-//#include "equations.h"
-//#include "math.h"
 
-
-////////////////////////////////////////////////////////////////////////////////
-///  
-///  Base class for the Rhumb Line equations.  Contains some common formulas.
-///
-////////////////////////////////////////////////////////////////////////////////
 //RhumbLineEquation.inheritsFrom(Equation);
 var RhumbLineEquation = {
 
-  ////////////////////////////////////////////////////////////////////////////////
-  ///  @brief
-  ///       compute mod value:
-  ///        mod=y - x * int(y/x) 
-  ///        if (mod < 0) mod = mod + x 
-  ///
-  ///  @param [in] <x>, <y> 
-  ///
-  ///  @return <mod(y,x)>
-  ///
-  ////////////////////////////////////////////////////////////////////////////////
+  
 compute_mod : function(y, x) {
                 var mod = y - x*Math.floor(y/x);
                 if (mod < 0 )
@@ -45,18 +11,7 @@ compute_mod : function(y, x) {
                 return mod;
               },
 
-              ////////////////////////////////////////////////////////////////////////////////
-              ///  @brief
-              ///       compute an intermediate value that is used in a couple of the 
-              ///      Rhumb Line equations:
-              ///      dphi =log (tan(lat2/2+pi/4)/tan(lat1/2+pi/4))
-              ///
-              ///  @param [in] <lat1> <in units of degrees (radians)>
-              ///  @param [in] <lat2> <in units of degrees (radians)>
-              ///
-              ///  @return <computed value of dphi>
-              ///
-              ////////////////////////////////////////////////////////////////////////////////
+              
 compute_dphi : function(lat1, lat2) {
                  var  x = Math.tan((lat2/2.0)+(CONST.PI/4.0));
                  var  y = Math.tan((lat1/2.0)+(CONST.PI/4.0));
@@ -69,15 +24,7 @@ compute_dphi : function(lat1, lat2) {
 
 
 
-////////////////////////////////////////////////////////////////////////////////
-///  
-///  Computes the True Couse for shortest distance between two known position coordinates
-///
-///  TODO: add description to CX3Equations document
-///  derived from aviation formulatory v1.46:
-///    http://williams.best.vwh.net/avform.htm#Mach
-///
-////////////////////////////////////////////////////////////////////////////////
+
 function ComputeTrueCourseFromPositionCoordinates(TCrsOutput, Lat1input, Lon1input, Lat2input, Lon2input) {
   Equation.call(this, TCrsOutput, Lat1input, Lon1input, Lat2input, Lon2input);
 }

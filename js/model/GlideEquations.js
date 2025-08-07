@@ -1,18 +1,3 @@
-///
-// @file    $URL: http://192.168.2.10/svn/ASA/CX-3/trunk/Firmware/calculator/model/include/GlideEquations.h $
-// @author  $Author: george $
-// @version $Rev: 820 $
-// @date    $Date: 2012-05-10 17:17:36 -0700 (Thu, 10 May 2012) $
-// @brief   Declarations of equations to calculate glide ratios
-//
-// NOTE that Equation instances must not have mutable state for this to work
-// (they get constructed once, globally)!
-//
-//#ifndef __INCLUDED_GLIDE_EQUATIONS_H
-//#define __INCLUDED_GLIDE_EQUATIONS_H
-//
-//#include "LinearEquations.h"
-//#include "definedUnits.h"
 
 
 function ComputeRatioFromDistanceAndDescent(ratioOutput, distanceInput, descentInput) {

@@ -1,9 +1,3 @@
-/*
-CX-3 - Flight Calculator
-Copyright (C) 2013 Aviation Supplies & Academics, Inc.
-Ported to javascript by Dean Brestel
-*/
-
 /**
  * @file
  * Functions for reading and formating Hms and Dms values.

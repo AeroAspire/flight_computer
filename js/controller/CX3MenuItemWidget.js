@@ -1,20 +1,3 @@
-///
-// @file    $URL: http://192.168.2.10/svn/ASA/CX-3/trunk/Firmware/calculator/ui/src/CX3MenuItemWidget.cpp $
-// @author  $Author: dean $
-// @version $Rev: 732 $
-// @date    $Date: 2012-03-07 15:47:54 -0800 (Wed, 07 Mar 2012) $
-// @brief   Widget to be used in a menu list.  Elements have properties (e.g. text) and let
-//      their owners know when they are 'clocked'
-//
-
-////////////////////////////////////////////////////////////////////////////////
-///  @brief  
-///    Builds a default CX3MenuItemWidget.  
-///
-///  Memory is only allocated during construction and will be reused throughout
-///    the lifetime of this object.
-///
-////////////////////////////////////////////////////////////////////////////////
 function CX3MenuItemWidget() {
   Widget.call(this);
   // Create the DOM element for this widget:
@@ -26,18 +9,6 @@ function CX3MenuItemWidget() {
 // CX3MenuItemWidget is a subclass of Widget:
 CX3MenuItemWidget.inheritsFrom(Widget);
 
-////////////////////////////////////////////////////////////////////////////////
-///  @brief
-///    Set the text to be shown and event info to be communicated when the 
-///    item is clicked.
-///
-///  @param [in] <text> <text to show for new list item>
-///
-///  @param [in] <evt> <event to post when item is 'clicked'>
-///
-///  @param [in] <param> <parameter to pass with specified event>
-///
-////////////////////////////////////////////////////////////////////////////////
 CX3MenuItemWidget.prototype.Set = function(text, evt, param) {
   // Remove old data
   this.label = text;

@@ -1,30 +1,4 @@
-///
-// @file    $URL: http://192.168.2.10/svn/ASA/CX-3/trunk/Firmware/calculator/model/include/CompassHeadingEquations.h $
-// @author  $Author: george $
-// @version $Rev: 790 $
-// @date    $Date: 2012-04-10 16:17:20 -0700 (Tue, 10 Apr 2012) $
-// @brief   Equations used for calcuating various altitude values
-//
-// NOTE that Equation instances must not have mutable state for this to work
-// (they get constructed once, globally)!
-//
-//#ifndef __INCLUDED_COMPASS_HEADING_EQUATIONS_H
-//#define __INCLUDED_COMPASS_HEADING_EQUATIONS_H
-//
-//#include "calculator.h"
-//#include "CX3Equations.h"
-//#include "variables.h"
-//#include "equations.h"
-//#include "math.h"
-//#include "WindCorrectionEquations.h"    //contains normalizeangle() function
 
-
-////////////////////////////////////////////////////////////////////////////////
-///  
-///  Computes True Heading when Magnetic Variation, Magnetic Deviation, and
-///  Compass Heading are known.
-///
-////////////////////////////////////////////////////////////////////////////////
 function ComputeTrueHeadFromMagVarAndMagDevAndCompHead(trueHeadOut, magVarInput, magDevInput, compHeadInput) {
   Equation.call(this, trueHeadOut, magVarInput, magDevInput, compHeadInput);
 }

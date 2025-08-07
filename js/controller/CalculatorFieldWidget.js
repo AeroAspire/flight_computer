@@ -1,37 +1,4 @@
-///
-// @file    $URL: http://192.168.2.10/svn/ASA/CX-3/trunk/Firmware/calculator/ui/src/calculatorFieldWidget.cpp $
-// @author  $Author: george $
-// @version $Rev: 919 $
-// @date    $Date: 2013-06-24 09:30:15 -0700 (Mon, 24 Jun 2013) $
-// @brief   Widget that stores displays a variable for an equation 
-//      and its status.
-//
 
-//#include "calculatorFieldWidget.h"
-//#include "variables.h"
-//#include "definedUnits.h"
-//#include "definedVariables.h"
-//#include "CX3_UI_res.h"
-//#include "widgetIDs.h"
-//#include "calc_utility.h"
-//#include <stdlib.h>
-//#include <stdio.h>
-//#include <string.h>
-//#include <cassert>
-//#include <string.h>
-//#include <math.h>
-//
-//// Fix name issues with EWL
-//#ifdef _EWL_STRING_H
-//#define strnlen strnlen_s
-//#endif
-
-// === FROM CX3Display === //
-//////////////////////////////////////////////////////////////////////////////////////////////
-/// CX3 display flags
-/// @brief
-/// These flags are used adjust the position or hide widgets and to control which keys are valid
-/// for data entry
 var WIDGET_FLAG = {
   CX3_HIDE_STATUS_ICON : 0x0001,
   CX3_HIDE_VALUE : 0x0002,
@@ -50,8 +17,7 @@ var WIDGET_FLAG = {
   CX3_SEND_EVT_DIRTY_OR_NOVALUE : 0x4000,  // setting changed or cleared before up/down arrow - send event to process change
 };
 
-/// @brief
-/// Flag settings for common list items 
+
 
 WIDGET_FLAG.CX3_ITEM_FLAGS = (
   WIDGET_FLAG.CX3_HIDE_STATUS_ICON |
@@ -77,13 +43,7 @@ WIDGET_FLAG.CX3_ENTRY_TYPE_FLAGS = (
   WIDGET_FLAG.CX3_HIDE_VALUE |
   WIDGET_FLAG.CX3_DISPLAY_UNIT_AS_VALUE |
   WIDGET_FLAG.CX3_IGNORE_KEYS_EXCEPT_ENTER);
-/*
-WIDGET_FLAG.CX3_SET_UNIT_FLAGS  (
-  WIDGET_FLAG.CX3_HIDE_STATUS_ICON |
-  WIDGET_FLAG.CX3_HIDE_VALUE |
-  WIDGET_FLAG.CX3_STRETCH_NAME_UNITS |
-  WIDGET_FLAG.CX3_IGNORE_NON_EVENT_KEYS);
-*/
+
 WIDGET_FLAG.CX3_SET_UNIT_FLAGS = (
   WIDGET_FLAG.CX3_HIDE_STATUS_ICON |
   WIDGET_FLAG.CX3_ALLOW_UNIT_CHANGE_ONLY);
@@ -103,27 +63,11 @@ WIDGET_FLAG.CX3_AIRCRAFT_ITEM_FLAGS = (
   WIDGET_FLAG.CX3_IGNORE_NON_EVENT_KEYS);
 // === END FROM CX3Display === //
 
-/// @brief
-/// Default string displayed when the underlying variable has no value
 CONST.UNDEFINED_VAR = "--";
 
-/// @brief
-/// Event table for this class.  The events below have special functions that override the 
-/// base implementation.
-//pm_event_table_entry calculatorFieldWidgetEvents[] = {
-//  { PM_EVENT_LOST_FOCUS,    PM_EVENT_HANDLER(CalculatorFieldWidget::OnEventLostFocus)},
-//  { PM_EVENT_GAINED_FOCUS,  PM_EVENT_HANDLER(CalculatorFieldWidget::OnEventGainedFocus)},
-//  { PM_EVENT_KEYPAD_PUSH,   PM_EVENT_HANDLER(CalculatorFieldWidget::OnEventKeypadPush)},
-//  { 0, null}   /* array terminator */
-//};
 
-////////////////////////////////////////////////////////////////////////////////
-///  @brief  
-///    Builds a default CalculatorFieldWidget.
-///
-///  @param [in] <_var> <the variable to display as part of this widget>
-///
-////////////////////////////////////////////////////////////////////////////////
+
+
 function CalculatorFieldWidget(_var) {
   Widget.call(this);
   // Create the DOM element for this widget:
@@ -165,11 +109,7 @@ Object.defineProperty(CalculatorFieldWidget.prototype, "icon_", {
   }
 });
 
-////////////////////////////////////////////////////////////////////////////////
-///  @brief  
-///    Clean up after ourselves and remove memory that we may have allocated.
-///
-////////////////////////////////////////////////////////////////////////////////
+
 CalculatorFieldWidget.prototype.release = function() {
   // disconnect from our variable
   if (this.var_ != null)
@@ -179,20 +119,12 @@ CalculatorFieldWidget.prototype.release = function() {
   this.deattachUI();
 }
 
-////////////////////////////////////////////////////////////////////////////////
-///  @brief  
-///    returns true if this Widget has a variable; false otherwise.
-///
-////////////////////////////////////////////////////////////////////////////////
+
 CalculatorFieldWidget.prototype.hasVariable = function() {
   return this.var_ != null;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-///  @brief  
-///    Get's this Widget's variable if it exists or returns null.
-///
-////////////////////////////////////////////////////////////////////////////////
+
 CalculatorFieldWidget.prototype.getVariable = function() {
   if (this.hasVariable()) {
     return this.var_;
@@ -202,20 +134,7 @@ CalculatorFieldWidget.prototype.getVariable = function() {
   }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-///  @brief  
-///    Set the underlying variable that this Widget represents.  Any data 
-///    that the variable has will be used to updated the Widget's display.
-///
-///  @param [in] <_var> <the variable to display>
-///
-///  @param [in] <evt> <event to post when item is 'clicked'>
-///
-///  @param [in] <param> <parameter to pass with specified event>
-///
-///  @param [in] <flags> <flags to control position and hiding of child widgets>
-///
-////////////////////////////////////////////////////////////////////////////////
+
 CalculatorFieldWidget.prototype.setVariable = function(_var,  evt, param, flags) {
   this.ui.className = this.__defaultClass__;
   evt = (typeof evt !== "undefined")? evt : 0;
@@ -230,13 +149,6 @@ CalculatorFieldWidget.prototype.setVariable = function(_var,  evt, param, flags)
   this.param_ = param;
   this.flags_ = flags;
 
-  // Check for non-selectable item
-  /*TODO: check if needed
-  if (flags & WIDGET_FLAG.CX3_NON_SELECTABLE)
-    RemoveStatus(PM_SF_SELECTABLE);
-  else
-    AddStatus(PM_SF_SELECTABLE);
-  */
 
   // Check to see if the variable accepts user input or not
   if (this.var_.isReadOnly()) {
@@ -280,38 +192,9 @@ CalculatorFieldWidget.prototype.setVariable = function(_var,  evt, param, flags)
     else {
       this.ui.removeClass("indent-left");
     }
-    /* TODO: is this needed?
-    if (flags & WIDGET_FLAG.CX3_INDENT_LEFT) {
-      loc.Left += INDENT_LEFT_OFFSET;
-      //loc.Right += INDENT_LEFT_OFFSET;
-    }
-    // check for long variable name
-    width = TextWidth(this.var_.name(), this.LargeFontID_);
-    if (width > (loc.Right - loc.Left)) {
-      //width -= NAME_WIDTH;
-      //loc.Right += width;
-      loc.Right = loc.Left + width;
-    }
-    else {
-      width = 0;
-    }
-    */
+   
   }
 
-  /* TODO: is this needed?
-  // Value
-  // check for long name
-  if (width > 0) {
-    loc.Left = loc.Right + VALUE_OFFSET;
-    loc.Right = VALUE_POS_RIGHT;
-  }
-  else {
-    loc.Left = VALUE_POS_LEFT;
-    loc.Right = VALUE_POS_RIGHT;
-  }
-
-  this.value_.Resize(loc);
-  */
 
   // check for hidden
   if (flags & WIDGET_FLAG.CX3_HIDE_VALUE) {
@@ -391,16 +274,7 @@ CalculatorFieldWidget.prototype.setVariable = function(_var,  evt, param, flags)
   } else {
     if (flags & WIDGET_FLAG.CX3_DISPLAY_UNIT_AS_VALUE) {
       this.ui.addClass("unit-as-value");
-      /*
-      loc.Left = VALUE_POS_LEFT;
-      loc.Left += width;    //adjust for long name
-      loc.Right = VALUE_POS_RIGHT;
-      this.units_.AssignFont(this.LargeFontID_);
-      this.units_.SetStyle(PM_BORDER_NONE|PM_JUSTIFY_RIGHT|PM_PAINT_TRANS);
-      // set as 'value' color unless read-only
-      if (!this.var_.isReadOnly())
-        this.units_.SetColor(PM_CI_TEXT, CID_VALUE_TEXT);
-      */
+     
     }
     else {
       this.ui.removeClass("unit-as-value");
@@ -411,24 +285,6 @@ CalculatorFieldWidget.prototype.setVariable = function(_var,  evt, param, flags)
   this.unit.textContent = this.var_.myPreferredUnit().name();
 }
 
-////////////////////////////////////////////////////////////////////////////////
-///  @brief  
-///    Show setting option for variable.
-///    NOTE: send a space, " ", for action text if no action text
-///
-///  @param [in] <_var> <Variable - the variable to display>
-///
-///  @param [in] <option_text> <string - the option text to display>
-///
-///  @param [in] <action_text> <string - the action text to display> 
-///
-///  @param [in] <evt> <event to post when item is 'clicked'>
-///
-///  @param [in] <param> <parameter to pass with specified event>
-///
-///  @param [in] <flags> <flags to control position and hiding of child widgets>
-///
-////////////////////////////////////////////////////////////////////////////////
 CalculatorFieldWidget.prototype.setOption = function(_var, option_text, action_text, evt, param, flags) {
   this.ui.className = this.__defaultClass__;
   // Make sure our variable input is set  
@@ -447,11 +303,7 @@ CalculatorFieldWidget.prototype.setOption = function(_var, option_text, action_t
   this.param_ = param;
   this.flags_ = flags;
 
-  // Populate the child widgets
-  // TODO: The UI strings should come from the Prism to make internationalization easier?  This could
-  //      be saved for future effort...
-
-  // Store option text in field name
+ 
   this.fieldName.innerText = option_text;
   this.fieldName.textContent = option_text;
 
@@ -477,32 +329,14 @@ CalculatorFieldWidget.prototype.setOption = function(_var, option_text, action_t
     this.ui.removeClass("small-font");
   }
 
-  // Favorites - not used, one space at far right edge
-  /*
-  if (flags & (WIDGET_FLAG.CX3_STRETCH_NAME_UNITS | WIDGET_FLAG.CX3_TIMER_ITEM)) {
-    this.ui.addClass("stretch-name");
-  }
-  else {
-    this.ui.removeClass("stretch-name");
-  }
-  */
-
+  
   // Units
   // display unit
   this.unit.innerText = action_text;
   this.unit.textContent = action_text;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-///  @brief  
-///    The underlying variable has changed.  Figure out what is different and
-///    update the display.
-///
-///  @param [in] <from> <Observable - pointer to the object that is sending the update>
-///
-///  @param [in] <int> <not used here>
-///
-////////////////////////////////////////////////////////////////////////////////
+
 CalculatorFieldWidget.prototype.update = function(from, _) {
   // Make sure that the notification is from our variable
   if (from == this.var_) {
@@ -588,11 +422,7 @@ CalculatorFieldWidget.prototype.update = function(from, _) {
   }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-///  @brief  
-///    Clear all data assoicated with the widget's underlying variable
-///
-////////////////////////////////////////////////////////////////////////////////
+
 CalculatorFieldWidget.prototype.clearVariable = function() {
   if (this.var_ != null) {
     // disconnect from our variable
@@ -612,11 +442,7 @@ CalculatorFieldWidget.prototype.clearVariable = function() {
   this.clearInput();
 }
 
-////////////////////////////////////////////////////////////////////////////////
-///  @brief  
-///    Clear out user input and any associated text on screen.
-///
-////////////////////////////////////////////////////////////////////////////////
+
 CalculatorFieldWidget.prototype.clearInput = function() {
   // set status icon to ?
   this.icon_ = "question";
@@ -630,21 +456,10 @@ CalculatorFieldWidget.prototype.clearInput = function() {
   this.userInput_ = "";
 }
 
-////////////////////////////////////////////////////////////////////////////////
-///  @brief  
-///    Widget has lost focus.  Process any user input and pass to underlying
-///    variable.
-///
-///  @param [in] <Event> <Keypad push event data>
-///
-///  @return <always returns 0 (1 causes Prism to terminate)>
-///
-////////////////////////////////////////////////////////////////////////////////
+
 CalculatorFieldWidget.prototype.OnEventLostFocus = function(Event) {   
   var setDirty = false;
 
-//  // always pass system events to base class 
-//  CX3ListItemBaseWidget::OnEventLostFocus(Event);
 
   // skip all processing if calculator memory active (process on return)
   if (!CX3Calculator.CalculatorMemoryActive) {
@@ -723,9 +538,7 @@ CalculatorFieldWidget.prototype.OnEventLostFocus = function(Event) {
       }
     }
     else if (this.var_.hasNoValue() && this.var_.hasLastValue()) {
-      // the underlying variable doesn't have a value, but there is
-      // some old input.  In this case we only show the old input
-      // when the widget has focus
+      
       this.value.innerText = CONST.UNDEFINED_VAR;
       this.value.textContent = CONST.UNDEFINED_VAR;
     }
@@ -749,15 +562,7 @@ CalculatorFieldWidget.prototype.OnEventLostFocus = function(Event) {
   return 0; 
 } 
 
-////////////////////////////////////////////////////////////////////////////////
-///  @brief  
-///    Widget has gained focus (e.g. is selected and input will be directed ///    here).
-///
-///  @param [in] <Event> <Keypad push event data>
-///
-///  @return <always returns 0 (1 causes Prism to terminate)>
-///
-////////////////////////////////////////////////////////////////////////////////
+
 CalculatorFieldWidget.prototype.OnEventGainedFocus = function(Event) { 
   var val;
 
@@ -792,8 +597,7 @@ CalculatorFieldWidget.prototype.OnEventGainedFocus = function(Event) {
     }
     else {
 
-      //TODO: rest of processing (depending on calculator status & output)
-      // treat as new value (and notify dependents that value cleared)
+      
       this.var_.clearValue();
 
       // set from calculator output - value in preferred units
@@ -803,8 +607,7 @@ CalculatorFieldWidget.prototype.OnEventGainedFocus = function(Event) {
       // set flag to clear input on next valid input event
       this.clearUserInput_ = true;
 
-      // re-set user input to correct precision
-      // TODO: format user input but do not truncate to 0-2 decimal places
+     
       this.formatUserInput(val, hms_or_dms);
     }
   }
@@ -860,21 +663,12 @@ CalculatorFieldWidget.prototype.OnEventGainedFocus = function(Event) {
   return 0; 
 }
 
-////////////////////////////////////////////////////////////////////////////////
-///  @brief  
-///    Handle key push events from the user.
-///
-///  @param [in] <Event> <Keypad push event data>
-///
-///  @return <always returns 0 (1 causes Prism to terminate)>
-///
-////////////////////////////////////////////////////////////////////////////////
+
 CalculatorFieldWidget.prototype.OnEventKeypadPush = function(evt) { 
   var calcValue;
   var prefUnit; 
 
-  // process memory function key LAST
-  // TODO: what if calculator function active?
+  
   if (evt.keyName == CONST.CX3_KEY.MEMORY) {
     // TODO: send memory function key to calculator here or below?
   }
@@ -922,9 +716,7 @@ CalculatorFieldWidget.prototype.OnEventKeypadPush = function(evt) {
     send_event = true;
     //evt.handled = true;
   }  
-  // New clock time entered via up/down key 
-  // NOTE: only option allowing user input is currently clock time 
-  // TOOD: new event if other setting allow user input
+  
   else if ((this.evt_ == CX3_WIDGET_EVENT.OPTION_SELECTED)) {
     if ((this.dirty_ == true) && ((evt.keyName == CONST.CX3_KEY.UP_ARROW) || (evt.keyName == CONST.CX3_KEY.DOWN_ARROW))) {
       send_event = true;

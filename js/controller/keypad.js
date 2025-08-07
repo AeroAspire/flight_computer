@@ -1,14 +1,4 @@
-///
-// @file    $URL: http://wally/svn/asa/CX-3/trunk/Firmware/calculator/ui/include/CX3Keypad.h $
-// @author  $Author: george $
-// @version $Rev: 716 $
-// @date    $Date: 2012-02-22 16:54:05 -0800 (Wed, 22 Feb 2012) $
-// @brief   IDs for the widgets used in the CX-3 application
-//
-/// @brief  number rows, columns, total keys
-//#define CX3_KEY_ROWS    7
-//#define CX3_KEY_COLUMNS    5
-//#define CX3_KEY_TOTAL    (CX3_KEY_ROWS * CX3_KEY_COLUMNS)
+
 
 /// @brief  key definitions
 CONST.CX3_KEY = {

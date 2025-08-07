@@ -1,26 +1,3 @@
-///
-// @file    $URL: http://192.168.2.10/svn/ASA/CX-3/trunk/Firmware/calculator/model/src/CX3Equations.cpp $
-// @author  $Author: george $
-// @version $Rev: 924 $
-// @date    $Date: 2013-07-15 13:42:56 -0700 (Mon, 15 Jul 2013) $
-// @brief   Global definitions for the equations used in the calculator
-//
-//#include "CX3Equations.h"
-//#include "definedVariables.h"
-//#include "GroundSpeedEquations.h"
-//#include "AltitudeEquations.h"
-//#include "CloudBaseEquations.h"
-//#include "StdAtmosphereEquations.h"
-//#include "FuelEquations.h"
-//#include "GlideEquations.h"
-//#include "CompassHeadingEquations.h"
-//#include "WindCorrectionEquations.h"
-//#include "AirSpeedEquations.h"
-//#include "WeightAndBalanceEquations.h"
-//#include "RhumbLineEquations.h"
-//#include "TripPlannerEquations.h"
-
-// Some constants used throughout the equations
 
 CONST.g = 9.80665;    // Gravity (m/s2)
 CONST.M = 0.0289644;  // Molar mass of Earth's air (kg/mol)

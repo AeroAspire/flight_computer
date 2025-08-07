@@ -1,61 +1,5 @@
-///////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
-//  
-//  Class Name: calculatorScreen
-//  
-//   Copyright (c) ASA
-//  
-//    All Rights Reserved
-//  
-// @file    $URL: http://wally/svn/asa/CX-3/trunk/Firmware/calculator/ui/src/CX3ListItemBaseWidget.cpp $
-// @author  $Author: mike $
-// @version $Rev: 402 $
-// @date    $Date: 2011-06-07 07:39:44 -0700 (Tue, 07 Jun 2011) $
-// @brief   used to display calculator function screen 
-////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
-
-/*
-#include "prism_includes.h"
-#include "calculator.h"
-#include "CX3_UI_res.h"
-#include "calculatorScreen.h"
-#include "widgetIDs.h"
-#include "calc_utility.h"
-#include "math.h"
-#include <string.h>
-
-// Fix name issues with EWL
-#ifdef _EWL_STRING_H
-#define strnlen strnlen_s
-#endif
-
-namespace CX3_UI {
-
-/// @brief
-/// Event table for this class.  The events below have special functions that override the 
-/// base implementation.
-pm_event_table_entry calculatorScreenEvents[] = {
-
-{ PM_EVENT_HIDE,                PM_EVENT_HANDLER(&calculatorScreen::OnEventHide)},
-{ PM_EVENT_KEYPAD_PUSH,              PM_EVENT_HANDLER(&calculatorScreen::OnEventKeypadPush)},
-{ CX3_PRISM_EVENT_CALCULATOR_OUTPUT_READY,    PM_EVENT_HANDLER(&calculatorScreen::OnEventOutputReady)},
-{ 0, NULL}   // array terminator
-};
-;
-*/
-
 CONST.MAX_CALCULATOR_ITEMS = 9;
 
-////////////////////////////////////////////////////////////////////////////////
-///  @brief  
-///    Builds a default calculatorScreen panel and creates the children.  Memory
-///    is only allocated during construction and will be reused throughout
-///    the lifetime of this object.
-///
-///  @param [in] <size> <Display size for this panel>
-///
-////////////////////////////////////////////////////////////////////////////////
 function CalculatorScreen() {
   Panel.call(this);
   this.title = "CALCULATOR";
@@ -78,55 +22,7 @@ function CalculatorScreen() {
 // CalculatorScreen is a subclass of Panel:
 CalculatorScreen.inheritsFrom(Panel);
 
-/*
-////////////////////////////////////////////////////////////////////////////////
-///  @brief  
-///    Clean up after ourselves and remove memory that we may have allocated.
-///
-////////////////////////////////////////////////////////////////////////////////
-calculatorScreen::~calculatorScreen() {
-for (unsigned int i = 0; i < ARRAY_SIZE(this.calculator_items_); i++) {
-Destroy(this.calculator_items_[i]);
-}
 
-// takes care of the list
-Destroy(this.calculatorList_);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-///  @brief  
-///    Main event handler function.  Searches our event table to see if our
-///    class processes the specified event.
-///
-///  @param [in] <Event> <Event to be processed>
-///
-///  @return <whatever the matching function (or base class if there isn't one)
-///        returns>
-///
-////////////////////////////////////////////////////////////////////////////////
-pm_int_t CalculatorScreen.prototype.Notify = function(const pm_event_t &Event) {
-pm_event_table_entry *pEventList = calculatorScreenEvents;
-
-while(pEventList.EventType) {
-if (pEventList.EventType == Event.Type) {
-if (pEventList.Handler == NULL) {
-return 0;
-}
-return PM_CALL_EVENT_HANDLER(*this, pEventList.Handler)(Event);
-}
-pEventList++;
-}
-
-return Pm_Panel::Notify(Event);
-}
- */
-
-////////////////////////////////////////////////////////////////////////////////
-///  @brief
-///    Displays the Calculator function screen
-///
-///
-////////////////////////////////////////////////////////////////////////////////
 CalculatorScreen.prototype.ShowCalculator = function() {
   // make sure that we've allocated our memory
   //assert(this.calculator_items_ != NULL);
@@ -151,17 +47,7 @@ CalculatorScreen.prototype.ShowCalculator = function() {
   this.output_ = false;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-///  @brief
-///       add a new item to the list.  No check for duplicates is made
-///
-///  @param [in] <text> <text to show for new list item>
-///
-///  @param [in] <item> <item number>
-///
-///  @return <true if there was room in the list, false otherwise>
-///
-////////////////////////////////////////////////////////////////////////////////
+
 CalculatorScreen.prototype.AddItem = function(text, item) {
   var active_line;
 
@@ -184,11 +70,7 @@ CalculatorScreen.prototype.AddItem = function(text, item) {
   return false;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-///  @brief
-///       Clear items and remove them from list (but don't delete them).
-///
-////////////////////////////////////////////////////////////////////////////////
+
 CalculatorScreen.prototype.clearListData = function() 
 {   
   for (var i = 0; i < this.calculator_items_.length; i++) {
@@ -198,15 +80,7 @@ CalculatorScreen.prototype.clearListData = function()
   }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-///  @brief  
-///    Process 'calculator output ready' event  
-///
-///  @param [in] <Event> <key data>
-///
-///  @return <always returns 0 (1 causes Prism to terminate)>
-///
-////////////////////////////////////////////////////////////////////////////////
+
 CalculatorScreen.prototype.OnEventOutputReady = function(Event) {
   var calc_text;
   var i;
@@ -387,16 +261,7 @@ CalculatorScreen.prototype.OnEventOutputReady = function(Event) {
 
 }
 
-////////////////////////////////////////////////////////////////////////////////
-///  @brief  
-///    Process keypress.  If this is the 'enter' key, send the event up to
-///    the parent for processing.
-///
-///  @param [in] <Event> <key data>
-///
-///  @return <always returns 0 (1 causes Prism to terminate)>
-///
-////////////////////////////////////////////////////////////////////////////////
+
 CalculatorScreen.prototype.OnEventKeypadPush = function(Event) { 
   if (DEBUG) {
     console.log("CalculatorScreen.prototype.OnEventKeypadPush");
@@ -561,27 +426,3 @@ CalculatorScreen.prototype.OnEventKeypadPush = function(Event) {
 
   return 0;
 }
-
-/*
-////////////////////////////////////////////////////////////////////////////////
-///  @brief
-///    Event callback for when the screen is unlinked from the parent (and 
-///      removed from view.  This prevents multiple items from being 
-///      'selected' next time the list is shown.
-///
-///  @param [in] <Event> <event data (id, parameters, source, etc.>
-///
-///  @return <always returns 0>
-///
-////////////////////////////////////////////////////////////////////////////////
-pm_int_t CalculatorScreen.prototype.OnEventHide = function(const pm_event_t &Event) {
-  Pm_Panel::OnEventHide(Event);
-
-  int size = this.calculatorList_.GetNumItems();
-  for (int i = 0; i < size; i++) {
-    KillFocus(this.calculatorList_.GetThing(i));
-  }
-
-  return 0;
-}
-*/
